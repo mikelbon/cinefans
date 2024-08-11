@@ -16,8 +16,35 @@ class Pila {
             this.arreglo = new Array(this.tamanioDefault);
         }
     }
+    apilar(element) {
+        if (this.numElementos === this.arreglo.length) {
+            throw Error("Array is Full");
+        }
+        else {
+            this.arreglo[this.indiceActual] = element;
+            this.indiceActual++;
+            this.numElementos++;
+        }
+    }
+    desapilar() {
+        if (this.numElementos === 0) {
+            throw Error("Array is Empty");
+        }
+        else {
+            this.indiceActual--;
+            const elemento = this.arreglo[this.indiceActual];
+            this.numElementos--;
+            return elemento;
+        }
+    }
 }
 const pila = new Pila();
-const pila2 = new Pila(20);
-console.log(pila.arreglo.length);
-console.log(pila2.arreglo.length);
+pila.apilar(25);
+pila.apilar(11);
+pila.apilar(87);
+let elemento = pila.desapilar();
+console.log(elemento);
+elemento = pila.desapilar();
+console.log(elemento);
+elemento = pila.desapilar();
+console.log(elemento);

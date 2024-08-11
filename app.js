@@ -32,10 +32,17 @@ class OBH {
         console.log("Cancel OBH");
     }
 }
+var ServiceType;
+(function (ServiceType) {
+    ServiceType[ServiceType["Renew"] = 0] = "Renew";
+    ServiceType[ServiceType["Login"] = 1] = "Login";
+    ServiceType[ServiceType["Cancel"] = 2] = "Cancel";
+})(ServiceType || (ServiceType = {}));
 const button = document.getElementById("btn");
 const service = document.getElementById("service");
 const task = document.getElementById("task");
 let selectedService;
+let currentOperation;
 service.addEventListener("change", (e) => {
     switch (service.value) {
         case '1':
@@ -52,12 +59,25 @@ service.addEventListener("change", (e) => {
 task.addEventListener("change", (e) => {
     switch (task.value) {
         case '1':
-            selectedService.Login();
+            currentOperation = ServiceType.Renew;
             break;
         case '2':
-            selectedService.Renew();
+            currentOperation = ServiceType.Login;
             break;
         case '3':
+            currentOperation = ServiceType.Cancel;
+            break;
+    }
+});
+button.addEventListener("click", (e) => {
+    switch (currentOperation) {
+        case ServiceType.Renew:
+            selectedService.Renew();
+            break;
+        case ServiceType.Login:
+            selectedService.Login();
+            break;
+        case ServiceType.Cancel:
             selectedService.Cancel();
             break;
     }
