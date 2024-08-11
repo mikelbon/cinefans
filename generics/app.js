@@ -83,3 +83,21 @@ elemento = pila.desapilar();
 console.log(elemento);
 elemento = pila.desapilar();
 console.log(elemento);
+function print(entity) {
+    console.log("Special Report: ");
+    console.log(entity);
+}
+print(3);
+print("Hello");
+print(true);
+//type PersonPropertyLiteral = "id" | "name" | "surname";
+//function getKeyOfUsingStringLiteral(pp1: PersonPropertyLiteral, value: IPerson) {
+//    console.log(pp1 + " "+value[pp1])
+//}
+function getKeyUsingKeyOf(key, value) {
+    console.log(key + " " + value[key]);
+}
+let testPerson = { id: 1, name: "Miguel", surname: "Carhuas", age: 25 };
+getKeyUsingKeyOf("name", testPerson);
+getKeyUsingKeyOf("surname", testPerson);
+getKeyUsingKeyOf("age", testPerson);

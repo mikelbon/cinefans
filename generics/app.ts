@@ -67,7 +67,7 @@ class OracleConnection implements ConnectionBase {
     connectionString: string = "def";
 }
 const generic: ClaseGenerica<SQLConnection, string> = new ClaseGenerica(new SQLConnection());
-const generic2:ClaseGenerica<OracleConnection, number> = new ClaseGenerica(new OracleConnection());
+const generic2: ClaseGenerica<OracleConnection, number> = new ClaseGenerica(new OracleConnection());
 
 //const generic: ClaseGenerica<number,string> = new ClaseGenerica(3);
 //const prueba1 = generic.DoSomething(24);
@@ -96,3 +96,32 @@ console.log(elemento);
 
 elemento = pila.desapilar();
 console.log(elemento);
+
+function print<T>(entity: T) {
+    console.log("Special Report: ");
+    console.log(entity);
+}
+
+print(3);
+print("Hello");
+print(true);
+
+interface IPerson {
+    id: number;
+    name: string;
+    surname: string;
+    age:number;
+}
+//type PersonPropertyLiteral = "id" | "name" | "surname";
+//function getKeyOfUsingStringLiteral(pp1: PersonPropertyLiteral, value: IPerson) {
+//    console.log(pp1 + " "+value[pp1])
+//}
+function getKeyUsingKeyOf(key: keyof IPerson, value: IPerson) 
+{
+    console.log(key + " "+value[key])
+}
+
+let testPerson: IPerson = { id: 1, name: "Miguel", surname: "Carhuas", age: 25 };
+getKeyUsingKeyOf("name", testPerson);
+getKeyUsingKeyOf("surname", testPerson);
+getKeyUsingKeyOf("age", testPerson);    
