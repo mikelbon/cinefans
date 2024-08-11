@@ -47,29 +47,39 @@ class ClaseGenerica {
         const dato = parameter;
         return dato;
     }
+    OpenConnection(parameter) {
+        console.log(parameter.connectionString);
+    }
 }
 class SQLConnection {
     constructor() {
         this.connectionString = "abc";
     }
 }
-const generic = new ClaseGenerica(3);
-const prueba1 = generic.DoSomething(24);
-console.log(prueba1);
-const generic2 = new ClaseGenerica("Hello");
-const prueba2 = generic2.DoSomething("Hello World");
-console.log(prueba2);
-//const pila: Pila = new Pila();
+class OracleConnection {
+    constructor() {
+        this.connectionString = "def";
+    }
+}
+const generic = new ClaseGenerica(new SQLConnection());
+const generic2 = new ClaseGenerica(new OracleConnection());
+//const generic: ClaseGenerica<number,string> = new ClaseGenerica(3);
+//const prueba1 = generic.DoSomething(24);
+//console.log(prueba1);
 //
-//pila.apilar(25);
-//pila.apilar(11);
-//pila.apilar(87);
-//
-//let elemento: number = pila.desapilar();
-//console.log(elemento);
-//
-//elemento = pila.desapilar();
-//console.log(elemento);
-//
-//elemento = pila.desapilar();
-//console.log(elemento);
+//const generic2: ClaseGenerica<string, boolean> = new ClaseGenerica("Hello");
+//const prueba2 = generic2.DoSomething("Hello World");
+//console.log(prueba2)
+const pila = new Pila();
+const pila2 = new Pila();
+pila.apilar(25);
+pila.apilar(11);
+pila.apilar(82);
+pila2.apilar("Hola");
+pila2.apilar("Mundo");
+let elemento = pila.desapilar();
+console.log(elemento);
+elemento = pila.desapilar();
+console.log(elemento);
+elemento = pila.desapilar();
+console.log(elemento);

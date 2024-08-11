@@ -1,6 +1,6 @@
-class Pila {
+class Pila<T> {
     tamanioDefault: number = 100;
-    arreglo: number[];
+    arreglo: T[];
     indiceActual: number = 0;
     numElementos: number = 0;
 
@@ -17,7 +17,7 @@ class Pila {
         }
 
     }
-    apilar(element: number): void {
+    apilar(element: T): void {
         if (this.numElementos === this.arreglo.length) {
             throw Error("Array is Full");
         }
@@ -28,62 +28,71 @@ class Pila {
         }
     }
 
-    desapilar(): number {
+    desapilar(): T {
         if (this.numElementos === 0) {
             throw Error("Array is Empty");
         }
         else {
             this.indiceActual--;
-            const elemento: number = this.arreglo[this.indiceActual];
+            const elemento: T = this.arreglo[this.indiceActual];
             this.numElementos--;
             return elemento;
         }
     }
 }
-class ClaseGenerica<T,U> {
+class ClaseGenerica<T extends ConnectionBase, U> {
     dato?: T;
     dato2?: U;
-    constructor(_dato: T) 
-    {
+    constructor(_dato: T) {
         this.dato = _dato;
         console.log(this.dato2);
     }
-    DoSomething(parameter: T): T 
-    {
-        const dato:T = parameter;
+    DoSomething(parameter: T): T {
+        const dato: T = parameter;
         return dato;
+    }
+    OpenConnection(parameter: T): void {
+        console.log(parameter.connectionString)
     }
 }
 
-interface ConnectionBase<T>
-{
+interface ConnectionBase {
     connectionString?: string;
 }
 
-class SQLConnection implements ConnectionBase<string>
-{
+class SQLConnection implements ConnectionBase {
     connectionString: string = "abc";
 }
-const generic: ClaseGenerica<number,string> = new ClaseGenerica(3);
-const prueba1 = generic.DoSomething(24);
-console.log(prueba1);
+class OracleConnection implements ConnectionBase {
+    connectionString: string = "def";
+}
+const generic: ClaseGenerica<SQLConnection, string> = new ClaseGenerica(new SQLConnection());
+const generic2:ClaseGenerica<OracleConnection, number> = new ClaseGenerica(new OracleConnection());
 
-const generic2: ClaseGenerica<string, boolean> = new ClaseGenerica("Hello");
-const prueba2 = generic2.DoSomething("Hello World");
-console.log(prueba2)
+//const generic: ClaseGenerica<number,string> = new ClaseGenerica(3);
+//const prueba1 = generic.DoSomething(24);
+//console.log(prueba1);
+//
+//const generic2: ClaseGenerica<string, boolean> = new ClaseGenerica("Hello");
+//const prueba2 = generic2.DoSomething("Hello World");
+//console.log(prueba2)
 
 
-//const pila: Pila = new Pila();
-//
-//pila.apilar(25);
-//pila.apilar(11);
-//pila.apilar(87);
-//
-//let elemento: number = pila.desapilar();
-//console.log(elemento);
-//
-//elemento = pila.desapilar();
-//console.log(elemento);
-//
-//elemento = pila.desapilar();
-//console.log(elemento);
+const pila: Pila<number> = new Pila();
+const pila2: Pila<string> = new Pila();
+
+pila.apilar(25);
+pila.apilar(11);
+pila.apilar(82);
+
+pila2.apilar("Hola");
+pila2.apilar("Mundo");
+
+let elemento: number = pila.desapilar();
+console.log(elemento);
+
+elemento = pila.desapilar();
+console.log(elemento);
+
+elemento = pila.desapilar();
+console.log(elemento);
