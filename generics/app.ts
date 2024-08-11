@@ -40,18 +40,50 @@ class Pila {
         }
     }
 }
+class ClaseGenerica<T,U> {
+    dato?: T;
+    dato2?: U;
+    constructor(_dato: T) 
+    {
+        this.dato = _dato;
+        console.log(this.dato2);
+    }
+    DoSomething(parameter: T): T 
+    {
+        const dato:T = parameter;
+        return dato;
+    }
+}
 
-const pila: Pila = new Pila();
+interface ConnectionBase<T>
+{
+    connectionString?: string;
+}
 
-pila.apilar(25);
-pila.apilar(11);
-pila.apilar(87);
+class SQLConnection implements ConnectionBase<string>
+{
+    connectionString: string = "abc";
+}
+const generic: ClaseGenerica<number,string> = new ClaseGenerica(3);
+const prueba1 = generic.DoSomething(24);
+console.log(prueba1);
 
-let elemento: number = pila.desapilar();
-console.log(elemento);
+const generic2: ClaseGenerica<string, boolean> = new ClaseGenerica("Hello");
+const prueba2 = generic2.DoSomething("Hello World");
+console.log(prueba2)
 
-elemento = pila.desapilar();
-console.log(elemento);
 
-elemento = pila.desapilar();
-console.log(elemento);
+//const pila: Pila = new Pila();
+//
+//pila.apilar(25);
+//pila.apilar(11);
+//pila.apilar(87);
+//
+//let elemento: number = pila.desapilar();
+//console.log(elemento);
+//
+//elemento = pila.desapilar();
+//console.log(elemento);
+//
+//elemento = pila.desapilar();
+//console.log(elemento);

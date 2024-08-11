@@ -38,13 +38,38 @@ class Pila {
         }
     }
 }
-const pila = new Pila();
-pila.apilar(25);
-pila.apilar(11);
-pila.apilar(87);
-let elemento = pila.desapilar();
-console.log(elemento);
-elemento = pila.desapilar();
-console.log(elemento);
-elemento = pila.desapilar();
-console.log(elemento);
+class ClaseGenerica {
+    constructor(_dato) {
+        this.dato = _dato;
+        console.log(this.dato2);
+    }
+    DoSomething(parameter) {
+        const dato = parameter;
+        return dato;
+    }
+}
+class SQLConnection {
+    constructor() {
+        this.connectionString = "abc";
+    }
+}
+const generic = new ClaseGenerica(3);
+const prueba1 = generic.DoSomething(24);
+console.log(prueba1);
+const generic2 = new ClaseGenerica("Hello");
+const prueba2 = generic2.DoSomething("Hello World");
+console.log(prueba2);
+//const pila: Pila = new Pila();
+//
+//pila.apilar(25);
+//pila.apilar(11);
+//pila.apilar(87);
+//
+//let elemento: number = pila.desapilar();
+//console.log(elemento);
+//
+//elemento = pila.desapilar();
+//console.log(elemento);
+//
+//elemento = pila.desapilar();
+//console.log(elemento);
